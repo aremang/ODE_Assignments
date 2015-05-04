@@ -27,7 +27,7 @@ elseif s==2 % Spring with external force
 	F = 0.1;
 	m = 1;
 	k = 1;
-	omega = 1;
+	omega = 2;
 	A =@(t) [0,		1;...
 			-1,		-sigma];
 	figure()
@@ -66,7 +66,7 @@ end
  
 if(~isempty(s))
 	
-	[t,theta] = ode45(@my_ODE, [0 30], [init 0]);
+	[t,theta] = ode45(@my_ODE, [0 100], [init 0]);
 	
 	clf
 % 	subplot(2,1,1)
@@ -90,7 +90,7 @@ if(~isempty(s))
 	  'YColor'      , [.3 .3 .3], ...
 	  'LineWidth'   , 1         );
 	set(gcf, 'PaperPositionMode', 'auto');
-	print -depsc2 fig/wfric_gamma_05_omega_1.eps
+	print -depsc2 fig/wfric_gamma_05_omega_2.eps
 
 	
 end
