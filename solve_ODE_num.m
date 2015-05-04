@@ -20,17 +20,16 @@ if s==1 % Spring without external force
 	B =@(t) [0;...
 			0];
 	 
-	 
+	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 elseif s==2 % Spring with external force
-	sigma = 0; % sigma = my/(m*sqrt(k/m));
+	sigma = 0.5; % sigma = my/(m*sqrt(k/m));
 	F = 0.1;
 	m = 1;
 	k = 1;
-	omega = 3;
-	F = 0.1;
+	omega = 1;
 	A =@(t) [0,		1;...
-			1,		-sigma];
+			-1,		-sigma];
 	figure()
 	hold on
 	axis([0 20 -1 1])
@@ -67,16 +66,18 @@ end
  
 if(~isempty(s))
 	
-	[t,theta] = ode45(@my_ODE, [0 100], [init 0]);
+	[t,theta] = ode45(@my_ODE, [0 30], [init 0]);
 	
 	clf
 % 	subplot(2,1,1)
-% 	plot(t,theta(:,1))
-	
+ 	plot(t,theta(:,1))
+
+	figure()
 	u = gradient(theta(:,1));
 	v = gradient(theta(:,2));
 % 	subplot(2,1,2)
-	quiver(theta(:,1), theta(:,2), u, v, 0)
+	n = 2;
+	quiver(theta(1:n:end,1), theta(1:n:end,2), u(1:n:end), v(1:n:end), 0)
 
 	set(gca, ...
 	  'Box'         , 'off'     , ...
@@ -89,7 +90,7 @@ if(~isempty(s))
 	  'YColor'      , [.3 .3 .3], ...
 	  'LineWidth'   , 1         );
 	set(gcf, 'PaperPositionMode', 'auto');
-	print -depsc2 fig/wfric_-1.eps
+	print -depsc2 fig/wfric_gamma_05_omega_1.eps
 
 	
 end
