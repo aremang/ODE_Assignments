@@ -10,7 +10,7 @@ str = {'Spring w.o e.f', 'Spring w e.f', 'Pendulum down', 'Pendulum up'};
                 'ListString',str);
 
 if s==1 % Spring without external force
-	sigma = 1; % sigma = my/(m*sqrt(k/m));
+	sigma = -1; % sigma = my/(m*sqrt(k/m));
 	A =@(t) [0,		1;...
 			-1,		-sigma];
 	figure()
@@ -89,7 +89,7 @@ if(~isempty(s))
 	  'YColor'      , [.3 .3 .3], ...
 	  'LineWidth'   , 1         );
 	set(gcf, 'PaperPositionMode', 'auto');
-	print -depsc2 fig/wfric_1.eps
+	print -depsc2 fig/wfric_-1.eps
 
 	
 end
