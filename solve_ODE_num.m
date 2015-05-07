@@ -40,21 +40,21 @@ elseif s==2 % Spring with external force
 	 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 else % Pendulum
-	omega	= 1;
 	l		= 3;
-	amp		= 0.08*l;
+	amp		= 0.1*l;
 	g		= 9.82;
+	omega	= 1*sqrt(g/l);
 	a		= g/(l*omega^2);
 	epsi	= amp/(2*l);
-	gamma	= 0.1;
+	gamma	= 0.001;
 	kappa	= gamma/omega;
 	
 	if s==3 % Down
 		A =@(t) [0,							1;...
-				-(a-2*epsi*cos(t*omega)),	-kappa];
-		init = 0.1;
-		B = [0;...
-		 0];
+				(-a-2*epsi*cos(t*omega)),	-kappa];
+		init = 0.01;
+		B =@(t) [0;...
+				0];
 	else % Up
 		A =@(t) [0,							1;...
 				(a-2*epsi*cos(t*omega)),	-kappa];
@@ -66,7 +66,7 @@ end
  
 if(~isempty(s))
 	
-	[t,theta] = ode45(@my_ODE, [0 100], [init 0]);
+	[t,theta] = ode45(@my_ODE, [0 1000], [init 0]);
 	
 	clf
 % 	subplot(2,1,1)
