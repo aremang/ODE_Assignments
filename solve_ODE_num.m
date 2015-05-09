@@ -20,7 +20,7 @@ if s==1 % Spring without external force
 	B =@(t) [0;...
 			0];
 	 
-	
+	[t,theta] = ode45(@my_ODE, [0 1000], [init 0]);
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 elseif s==2 % Spring with external force
 	sigma = 0.5; % sigma = my/(m*sqrt(k/m));
@@ -38,35 +38,37 @@ elseif s==2 % Spring with external force
 	B =@(t) [0;...
 		 F/m*1/(sqrt(k/m)*x0)*cos(omega*t)];
 	 
+	[t,theta] = ode45(@my_ODE, [0 1000], [init 0]);
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-else % Pendulum
-	l		= 3;
-	amp		= 0.1*l;
-	g		= 9.82;
-	omega	= 1*sqrt(g/l);
-	a		= g/(l*omega^2);
-	epsi	= amp/(2*l);
-	gamma	= 0.001;
-	kappa	= gamma/omega;
-	
-	if s==3 % Down
-		A =@(t) [0,							1;...
-				(-a-2*epsi*cos(t*omega)),	-kappa];
+else % Pendulum	
+	if s==3
+		l		= 3;
+		amp		= 0.05*l;
+		g		= 9.82;
+		omega	= sqrt(g/l);
+		a		= g/(l*omega^2);
+		epsi	= amp/l;
+		gamma	= 0.1;
+		kappa	= gamma/omega;
 		init = 0.01;
-		B =@(t) [0;...
-				0];
 	else % Up
-		A =@(t) [0,							1;...
-				(a-2*epsi*cos(t*omega)),	-kappa];
-		init = pi+0.1;
-		B =@(t) [0;...
-				-(a-2*epsi*cos(t*omega))*pi];
+		l		= 3;
+		amp		= 0.05*l;
+		g		= 9.82;
+		omega	= 90;
+		a		= g/(l*omega^2);
+		epsi	= amp/l;
+		gamma	= 0.1;
+		kappa	= gamma/omega;
+		init = -pi+0.01;
 	end
+	f =@(t,x) [x(2);...
+				-(a-epsi*cos(t))*sin(x(1))-kappa*x(2)];
+	t = 1:0.2:100;
+	[t,theta] = ode45(f, t, [init 0]);
 end
  
 if(~isempty(s))
-	
-	[t,theta] = ode45(@my_ODE, [0 1000], [init 0]);
 	
 	clf
 % 	subplot(2,1,1)
@@ -77,7 +79,7 @@ if(~isempty(s))
 	v = gradient(theta(:,2));
 % 	subplot(2,1,2)
 	n = 2;
-	quiver(theta(1:n:end,1), theta(1:n:end,2), u(1:n:end), v(1:n:end), 0)
+	quiver(theta(1:n:end,1), theta(1:n:end,2), u(1:n:end), v(1:n:end))
 
 	set(gca, ...
 	  'Box'         , 'off'     , ...
