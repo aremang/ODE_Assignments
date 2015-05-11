@@ -1,0 +1,48 @@
+% ODE Assignment 1 - Pendulum case
+
+%% Constants & parameters
+
+g = 9.82;
+l = 3.0;            %length of the swing
+A = 0.1*l;          %Amplitude of the oscillations
+gamma = 0;          %Friction coefficient
+omega = 2*sqrt(g/l);      %Exitation frequency
+
+tau = 0;            %Begynnelsevärde
+T = 1000;             %End time
+x0 = [0.1 0]';        %Randvillkor
+
+f = @(t,x)[x(2);-gamma/omega*x(2)-(g-A*omega^2*cos(t))*sin(x(1))/(l*omega^2)];
+
+t = tau:0.2:T;
+
+[T,X] = ode45(f,t,x0);
+
+
+%% Time and phase plotting
+figure(1)
+plot(T,X(:,1));
+
+
+figure(2)
+quiver(X(:,1),X(:,2),gradient(X(:,1)),gradient(X(:,2)))
+title('Phase portrait')
+xlabel('Angle')
+ylabel('Angular velocity')
+
+%% Numerical stability check
+N= 100;
+x01 = [1 0]';
+x02 = [0 1]';
+
+kappa = gamma/omega;
+a = g/(l*omega^2);
+epsilon = A/(2*l);
+
+f2 = @(t,x)[x(2);-kappa*x(2)-(a-2*epsilon*cos(t))*x(1)];
+
+for i=1:N
+    [T,X] = ode45(f,t,x01);
+    [T2,X2]=ode45(f,t,x02);
+
+
