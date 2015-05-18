@@ -1,4 +1,3 @@
-
 \documentclass[
   twoside,
   11pt, a4paper,
@@ -7,17 +6,162 @@
   cleardoublepage=empty
 ]{scrbook}
 
+\usepackage{amsmath}
 
-
-\title{ODE assigment}
-\author{Andreas Andersson}
+\title{\Large MVE161\\ \small Ordinary differential equations\\ and mathematical modelling\\ \Huge Home assigment 1}
+\author{Andreas Andersson - 920206-0134\\ collaborators: \\Viktor Runemalm \& Albin Remäng}
 
 \begin{document}
 
 \maketitle
 
+\chapter{Question 1}
+To make an analysis of the system mass-spring~\eqref{eq:ms} and mass-spring-damper~\eqref{eq:msd} easier the equations get non-dimensionalized.
+\begin{equation}\label{eq:ms}
+	m \ddot{x} = -k x
+\end{equation}
+\begin{equation}\label{eq:msd}
+	m \ddot{x} = -c \dot{x} -k x
+\end{equation}
+After the non-dimensionalization the constants has no units and the time is scaled so the eigenfrequency is equal to one. 
 
-\chapter*{Question 1} 
+\section{Mass-Spring}
+For the case with the mass-spring when there is no friction, equation~\eqref{eq:ms}. After the non-dimensionalization the system can be described with:
+
+\begin{equation}
+	\ddot{x}^*=-x^*
+\end{equation}
+To get the equation on a state-space-form variables is assigned as $x_1=x^*$ and $x_2=\dot{x}^*$ which gives the system:
+\begin{equation}
+	\begin{gathered}
+		\dot{x}=A(t)x\\
+		\begin{bmatrix}
+			\dot{x_1}\\
+			\dot{x_2}
+		\end{bmatrix}=\begin{bmatrix}
+			0	&	1\\
+			-1	&	0
+		\end{bmatrix}\begin{bmatrix}
+			x_1\\
+			x_2
+		\end{bmatrix}
+	\end{gathered}
+\end{equation}
+The only stationary point for the system is $x_1=x_2=0$ and it is stable for $t\rightarrow+\infty$. To see if the system is bounded or unbounded the eigenvalues are calculated according to:
+\begin{equation}\label{eq:ms_eig}
+	\begin{gathered}
+		\lambda^2-Tr(A(t))\lambda+det(A(t))=0\\
+		\Rightarrow \lambda_{1,2}=\pm i
+	\end{gathered}
+\end{equation}
+According to the eigenvalues calculated in equation~\eqref{eq:ms_eig} the system is bounded because the real part of the eigenvalues is zero, marginaly stable.
+
+To find the periodic solutions the monodromy matrix is needed and it is calculated with the fundamental matrix. To get the fundamental matrix assume that $x_1=a\cos(t)+b\sin(t)$.  The first and second column of the fundamental matrix solution~\eqref{eq:ms_fund} is given by the initial condition $x_1(0)=1$ and $x_2(0)=0$ $\rightarrow (a=1, b=0)$ respectively $x_1(0)=0$ and $x_2(0)=1$ $\rightarrow (a=0, b=1)$.
+
+\begin{equation}\label{eq:ms_fund}
+	\Phi(t)=\begin{bmatrix}
+				cos(t)	&	sin(t)\\
+				-sin(t)	&	cos(t)
+			\end{bmatrix}
+\end{equation} 
+Because of that the fundamental matrix solution only contains sinus and cosinus terms the periodicy is testet for $T=2\pi$:
+\begin{equation}\label{ms_mon}
+	\begin{gathered}
+		\Phi(t+T)=\Phi(t) e^{TR}\\
+		(t=0\text{ and }T=2\pi)\\
+		\Phi(2\pi)=\Phi(0) e^{2\pi R}
+	\end{gathered}
+\end{equation}
+Equation~\eqref{ms_mon} shows that the fundamental matrix solution is the monodromy matrix and that the system is periodic in $T=2\pi$.
+
+\section{Mass-Spring-Damper}
+For the case with the mass-spring-damper when there is friction, equation~\eqref{eq:msd}. After the non-dimensionalization the system can be described with:
+
+\begin{equation}
+	\ddot{x}^*=-\gamma\dot{x}^*-x^*
+\end{equation}
+To get the equation on a state-space-form variables is assigned as $x_1=x^*$ and $x_2=\dot{x}^*$ which gives the system:
+\begin{equation}
+	\begin{gathered}
+		\dot{x}=A(t)x\\
+		\begin{bmatrix}
+			\dot{x_1}\\
+			\dot{x_2}
+		\end{bmatrix}=\begin{bmatrix}
+			0	&	1\\
+			-1	&	-\gamma
+		\end{bmatrix}\begin{bmatrix}
+			x_1\\
+			x_2
+		\end{bmatrix}
+	\end{gathered}
+\end{equation}
+The only stationary point for the system is $x_1=x_2=0$ and it is stable for $t\rightarrow+\infty$. To see if the system is bounded or unbounded the eigenvalues are calculated according to:
+\begin{equation}\label{eq:msd_eig}
+	\begin{gathered}
+		\lambda^2-Tr(A(t))\lambda+det(A(t))=0\\
+		\Rightarrow \lambda_{1,2}=-\frac{\gamma}{2} \pm \sqrt{\frac{\gamma^2}{4}-1}
+	\end{gathered}
+\end{equation}
+\newpage
+The eigenvalues from the equation~\eqref{eq:msd_eig} is investigated for seven different cases: 
+\begin{enumerate}
+	\item $\gamma > 2$: $\lambda$ is real and negative $\Rightarrow$ stable
+	\item $\gamma = 2$: $\lambda$ is real and negative $\Rightarrow$ stable
+	\item $-2<\gamma <0$: $\lambda$ is real and imaginary but the real part is positive $\Rightarrow$ unstable
+	\item $\gamma = 0$: $\lambda$ is imaginary $\Rightarrow$ bounded
+	\item $0<\gamma <2$: $\lambda$ is real and imaginary but the real part is negative $\Rightarrow$ stable
+	\item $\gamma = -2$: $\lambda$ is real and positive $\Rightarrow$ unstable
+	\item $\gamma < -2$: $\lambda$ is real and positive $\Rightarrow$ unstable
+\end{enumerate}
+
+\chapter{Question 2}
+To make an analysis of the system mass-spring~\eqref{eq:ef_ms} with external force and mass-spring-damper~\eqref{eq:ef_msd} with external force easier the equations get non-dimensionalized.
+\begin{equation}\label{eq:ef_ms}
+	m \ddot{x} = -k x + F \cos(\omega t)
+\end{equation}
+\begin{equation}\label{eq:ef_msd}
+	m \ddot{x} = -c \dot{x} -k x + F \cos(\omega t)
+\end{equation}
+After the non-dimensionalization the constants has no units and the time is scaled so the eigenfrequency is equal to one. 
+
+\section{Mass-Spring with external force}
+For the case with the mass-spring and external force when there is no friction, equation~\eqref{eq:ef_ms}. After the non-dimensionalization the system can be described with:
+
+\begin{equation}
+	\ddot{x}^*=-x^*+\beta\cos(\omega t)
+\end{equation}
+
+% JAG SLUTADE SKRIVA OM HÄR
+
+
+To get the equation on a state-space-form variables is assigned as $x_1=x^*$ and $x_2=\dot{x}^*$ which gives the system:
+\begin{equation}
+	\begin{gathered}
+		\dot{x}=A(t)x\\
+		\begin{bmatrix}
+			\dot{x_1}\\
+			\dot{x_2}
+		\end{bmatrix}=\begin{bmatrix}
+			0	&	1\\
+			-1	&	0
+		\end{bmatrix}\begin{bmatrix}
+			x_1\\
+			x_2
+		\end{bmatrix}
+	\end{gathered}
+\end{equation}
+
+\section{Mass-Spring-Damper with external force}
+\chapter{Question 3}
+
+
+\chapter{Question 4}
+
+
+\chapter{Question 5}
+
+
 
     
 \end{document}

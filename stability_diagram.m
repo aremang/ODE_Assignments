@@ -1,20 +1,18 @@
 clear all
 clc
 
-N = 1e2;
+N = 1;
 
-epsi = linspace(-5,5,N);
-a = linspace(-2,5,N);
+epsi = linspace(-6,6,N);
+a = linspace(-2,3,N);
 
 sol = zeros(2);
+dot = zeros(N*N,2);
 
 T = 2*pi;
 t = 0:T/2:T;
 
-figure()
-axis([-2 5 -5 5])
-hold on
-counter = 0;
+num_sol = 1;
 
 for i=1:N
 	for ii=1:N
@@ -27,8 +25,23 @@ for i=1:N
 		sol(:,2) = theta(end,:)';
 		
 		if abs(trace(sol)) < 2
-			plot(a(i),epsi(ii),'b.')
-			counter = counter+1;
+			dot(num_sol,:) = [a(i),epsi(ii)];
+			num_sol = num_sol+1;
 		end
 	end
 end
+%%
+plot(dot(1:num_sol-1,1),dot(1:num_sol-1,2),'.')
+set(gca, ...
+  'Box'         , 'off'     , ...
+  'TickDir'     , 'out'     , ...
+  'TickLength'  , [.02 .02] , ...
+  'XMinorTick'  , 'on'      , ...
+  'YMinorTick'  , 'on'      , ...
+  'XGrid'       , 'on'      , ...
+  'YGrid'       , 'on'      , ...
+  'XColor'      , [.3 .3 .3], ...
+  'YColor'      , [.3 .3 .3], ...
+  'LineWidth'   , 0.5         );
+set(gcf, 'PaperPositionMode', 'auto');
+print -depsc2 fig/stab_3.eps
