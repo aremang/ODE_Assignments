@@ -25,7 +25,7 @@ To make an analysis of the system mass-spring~\eqref{eq:ms} and mass-spring-damp
 \end{equation}
 After the non-dimensionalization the constants has no units and the time is scaled so the eigenfrequency is equal to one. 
 
-\section{Mass-Spring}
+\section{Mass-Spring}\label{sec:ms}
 For the case with the mass-spring when there is no friction, equation~\eqref{eq:ms}. After the non-dimensionalization the system can be described with:
 
 \begin{equation}
@@ -74,7 +74,7 @@ Because of that the fundamental matrix solution only contains sinus and cosinus 
 \end{equation}
 Equation~\eqref{ms_mon} shows that the fundamental matrix solution is the monodromy matrix and that the system is periodic in $T=2\pi$.
 
-\section{Mass-Spring-Damper}
+\section{Mass-Spring-Damper}\label{sec:msd}
 For the case with the mass-spring-damper when there is friction, equation~\eqref{eq:msd}. After the non-dimensionalization the system can be described with:
 
 \begin{equation}
@@ -132,9 +132,6 @@ For the case with the mass-spring and external force when there is no friction, 
 	\ddot{x}^*=-x^*+\beta\cos(\omega t)
 \end{equation}
 
-% JAG SLUTADE SKRIVA OM HÄR
-
-
 To get the equation on a state-space-form variables is assigned as $x_1=x^*$ and $x_2=\dot{x}^*$ which gives the system:
 \begin{equation}
 	\begin{gathered}
@@ -148,11 +145,42 @@ To get the equation on a state-space-form variables is assigned as $x_1=x^*$ and
 		\end{bmatrix}\begin{bmatrix}
 			x_1\\
 			x_2
+		\end{bmatrix}+\begin{bmatrix}
+			0\\
+			\beta \cos(\omega t)
 		\end{bmatrix}
 	\end{gathered}
 \end{equation}
+The A-matrix is identical to the A-matrix in equation~\eqref{eq:ms} so the same conclutions as in section~\ref{sec:ms} is true for the system. Due to the external force the system can become instable even though the A-matrix is stable.
 
 \section{Mass-Spring-Damper with external force}
+For the case with the mass-spring-damper and external force when there is friction, equation~\eqref{eq:ef_msd}. After the non-dimensionalization the system can be described with:
+
+\begin{equation}
+	\ddot{x}^*=-\gamma\dot{x}^*-x^*+\beta\cos(\omega t)
+\end{equation}
+
+To get the equation on a state-space-form variables is assigned as $x_1=x^*$ and $x_2=\dot{x}^*$ which gives the system:
+\begin{equation}
+	\begin{gathered}
+		\dot{x}=A(t)x\\
+		\begin{bmatrix}
+			\dot{x_1}\\
+			\dot{x_2}
+		\end{bmatrix}=\begin{bmatrix}
+			0	&	1\\
+			-1	&	-\gamma
+		\end{bmatrix}\begin{bmatrix}
+			x_1\\
+			x_2
+		\end{bmatrix}+\begin{bmatrix}
+			0\\
+			\beta \cos(\omega t)
+		\end{bmatrix}
+	\end{gathered}
+\end{equation}
+The A-matrix is identical to the A-matrix in equation~\eqref{eq:ms} so the same conclutions as in section~\ref{sec:ms} is true for the system. Due to the external force the system can become instable even though the A-matrix is stable.
+
 \chapter{Question 3}
 
 

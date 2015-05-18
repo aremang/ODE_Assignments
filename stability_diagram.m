@@ -1,7 +1,7 @@
 clear all
 clc
 
-N = 200;
+N = 1024;
 
 epsi = linspace(-6,6,N);
 a = linspace(-2,3,N);
@@ -15,15 +15,16 @@ T = 2*pi;
 t = 0:T/2:T;
 
 num_sol = 1;
+h = waitbar(0,'Initializing waitbar...');
 
 for i=1:N
 	for ii=1:N
 		A =@(t,x)	[x(2);...
 			kappa*x(2)-(a(i)-epsi(ii)*cos(t))*x(1)];
 		
-		[~,theta] = ode45(A, t, [1 0]);
+		[~,theta] = ode113(A, t, [1 0]);
 		sol(:,1) = theta(end,:)';
-		[~,theta] = ode45(A, t, [0 1]);
+		[~,theta] = ode113(A, t, [0 1]);
 		sol(:,2) = theta(end,:)';
 		
 		if abs(trace(sol)) < 2
@@ -31,7 +32,9 @@ for i=1:N
 			num_sol = num_sol+1;
 		end
 	end
+	waitbar((i/N),h,'working...')
 end
+save('stab_fric')
 %%
 % plot(dot(1:num_sol-1,1),dot(1:num_sol-1,2),'.')
 % set(gca, ...

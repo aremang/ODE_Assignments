@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.5.3)  18 MAY 2015 11:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.5.3)  18 MAY 2015 14:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -199,12 +199,19 @@ Chapter 1.
 
 ]
 Chapter 2.
-[7] [8
 
+LaTeX Warning: Reference `sec:ms' on page 7 undefined on input line 154.
 
-]
+[7]
+
+LaTeX Warning: Reference `sec:ms' on page 8 undefined on input line 182.
+
+[8]
 Chapter 3.
-[9] [10
+[9
+
+
+] [10
 
 
 ]
@@ -214,29 +221,37 @@ Chapter 4.
 
 ]
 Chapter 5.
-[13] (./Andreas_main.aux) ) 
+[13] (./Andreas_main.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 2121 strings out of 494977
- 31304 string characters out of 6180184
+ 2125 strings out of 494977
+ 31345 string characters out of 6180184
  133324 words of memory out of 5000000
- 5379 multiletter control sequences out of 15000+600000
- 10545 words of font info for 38 fonts, out of 8000000 for 9000
+ 5382 multiletter control sequences out of 15000+600000
+ 10853 words of font info for 39 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  41i,13n,55p,448b,227s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-mi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on Andreas_main.pdf (13 pages, 116029 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy8.pfb>
+Output written on Andreas_main.pdf (13 pages, 126222 bytes).
 PDF statistics:
- 87 PDF objects out of 1000 (max. 8388607)
- 61 compressed objects within 1 object stream
+ 91 PDF objects out of 1000 (max. 8388607)
+ 64 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
